@@ -25,10 +25,10 @@ jobs:
       run: |
         bash pkg2appimage recipes/Unar.yml
 
-    - run: echo "rev=$(git rev-parse HEAD~1)" >> $GITHUB_ENV
+    - run: echo "tag=$(ls out | head -n 1 | cut -d "-" -f 2)" >> $GITHUB_ENV
     - name: Release
       uses: softprops/action-gh-release@v1
       with:
         files: 'out/*.AppImage'
-        tag_name: 1.10.1
+        tag_name: ${{ env.tag }} 
 
