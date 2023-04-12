@@ -1,0 +1,32 @@
+app: WeMeet
+
+ingredients:
+  dist: jammy
+  sources:
+    - deb http://archive.ubuntu.com/ubuntu/ jammy main universe multiverse
+  script:
+    - wget https://updatecdn.meeting.qq.com/cos/5a910969828531efb24add85626e2372/TencentMeeting_0300000000_3.14.0.402_x86_64_default.publish.deb
+  packages:
+    - libncurses-dev
+    - libpcre2-dev
+script:
+  - wget https://cdn.meeting.tencent.com/pro/Y2JmNmM1ODYtNGFmYS00MzNkLWFhNDItOWJkOGUzODc5M2Ri.svg -O wemeet.svg
+  -
+  - cat > wemeetapp.desktop <<\EOF
+  - [Desktop Entry]
+  - Name=WemeetApp
+  - Exec=/opt/wemeet/wemeetapp.sh %u
+  - Icon=wemeet
+  - Type=Application
+  - Terminal=false
+  - Categories=AudioVideo;
+  - MimeType=x-scheme-handler/wemeet;
+  - EOF
+  -
+  - cat > ./AppRun <<\EOF
+  - #!/bin/sh
+  - exec ${APPDIR}/opt/wemeet/wemeetapp.sh
+  - EOF
+  -
+  - chmod a+x ./AppRun
+

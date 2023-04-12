@@ -23,9 +23,9 @@ jobs:
 
     - name: build
       run: |
-        bash pkg2appimage recipes/Unar.yml
+        bash pkg2appimage recipes/WeMeet.yml
 
-    - run: echo "tag=$(ls out | head -n 1 | cut -d "-" -f 2)" >> $GITHUB_ENV
+    - run: echo "tag=$(ls WeMeet/ | grep Tencent | head -n 1 | cut -d "_" -f 3)" >> $GITHUB_ENV
     - name: Release
       uses: softprops/action-gh-release@v1
       with:
